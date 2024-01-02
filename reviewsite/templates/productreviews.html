@@ -1,0 +1,165 @@
+{% extends "layout.html" %}
+{% block title %}Results{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+<script>
+	$(document).ready(function () {
+		$('#selectedColumn').DataTable({
+			"lengthMenu":[[3, 5,10],[3,5,10]],
+		  "aaSorting": [],
+		  columnDefs: [{
+		  orderable: false,
+		  targets: 4
+		  }]
+		});
+		  $('.dataTables_length').addClass('bs-select');
+		});
+</script>
+<script>
+    function goBack() {
+       window.history.back();
+    }
+</script>
+{% if ( start >docs|length ) == false %}
+    {% set prepage = 0 %}
+	{%else %}
+	{%set prepage = start-docs|length %}
+{% endif %}
+
+{% if ( start+docs|length >=numFound ) == false %}
+    {% set nextpage = start+docs|length %}
+	{%else %}
+	{% set nextpage = start %}
+{% endif %}
+{%set totalpage = numFound/10 %}
+{%set currentpage = start/10+1 %}
+
+<body width = "80%">
+	<div>
+<h2 align = "center" style="color:blue;"><strong>Product reviews!</strong>
+	<a class="btn btn-lg btn-success" href="#">
+	<strong>	<i i class='fa fa-flag-checkered pull-left' style='color: yellow'></i>Awesome </strong></a>
+</h2>
+<br>
+<div >
+<span align = 'left'>
+	<a align='left' class="btn btn-success" href = "{{url_for('searchForm')}}">Other Product Review &nbsp;<i class='fa fa-search'></i></a>
+</span>
+
+<span align = 'right'>
+<button onclick="goBack()" align = "center" class="btn btn-info">Go Back</button>
+</span>
+</div>
+<hr style="border:2px solid #f1f1f1">
+
+<div class= "comment" align = 'left'>
+	<p class="text-left mt-3">
+
+	<span align = 'left'><span align = 'left'>Showing page <strong color='red'> {{currentpage|round(method='ceil')|int}}</strong></span>
+	out of <span align = 'left'><strong> {{totalpage|round(method='ceil')|int}}</strong></span>
+	<span>pages.</span>
+	</p>
+</div>
+<div class= "comment" align = 'left'>
+	<span align = 'center'>
+		<a class="btn btn-danger">Total <i class='fa fa-quora'></i>&ensp;<strong>{{numFound}}</strong></a>
+	</span>
+	{% if totalpage>1%}
+	<span align = 'center'>
+		{% if currentpage>1%}
+		<a class="btn btn-warning"  href = "{{url_for('productreviews', start =prepage, asin=asin,facetValue=facetValue)}}">
+			Pre-page&ensp;<i class='fa fa-arrow-circle-o-left'></i></a>
+		{% else %}
+		<a class="btn btn-warning" style="pointer-events:none" >
+			<i class='fa fa-arrow-circle-o-right'></i>&ensp;Pre-page
+		</a>
+		{% endif %}
+	</span>
+	<span class="review" align = 'center'>
+		{% if currentpage<totalpage%}
+		<a class="btn btn-warning" href = "{{url_for('productreviews', start =nextpage, asin=asin,facetValue=facetValue)}}">
+		<i class='fa fa-arrow-circle-o-right'></i>&ensp;Next-page </a>
+		{% else %}
+		<a class="btn btn-warning" style="pointer-events:none" >
+			<i class='fa fa-arrow-circle-o-right'></i>&ensp;Next-page
+		</a>
+		{% endif %}
+	</span>
+	{% endif %}
+	<span align = 'center'>
+		<a align='left' class="btn btn-success" href = "{{url_for('searchForm')}}">Review &nbsp;<i class='fa fa-search'></i></a>
+	</span>
+</div>
+<hr style="border:3px solid #f1f1f1">
+<h4 align='left'><span><strong>Product Name:</strong> {{productName}}</span></h4>
+<h4 align='left'><span><strong>Product ASIN:</strong> {{asin}}</span></h4>
+<h4 align='left'><sapn><strong>Average Rate:</strong></sapn>
+	<span >
+			{% for i in range(avgRate|int) %}
+			<span class="fa fa-star checked"></span>
+			{% endfor %}
+			{% if halfStar >0%}
+			<span class="fa fa-star-half-o" style="color:orange"></span>
+			{% endif %}
+			{% if remainStar>0 %}
+			{% for k in range(remainStar|int)%}
+			<span class="fa fa-star-o" style="color:orange"></span>
+			{% endfor %}
+			{% endif %}
+	</span>
+<span>{{numFound}}</span>
+</h4>
+<hr style="border:3px solid #f1f1f1">
+<div class="row" >
+	{% for fscore in facetCounts %}
+	<div class="side" width="20%">
+	<div align = "right">{{fscore}} star&emsp;&emsp;</div>
+	</div>
+	<div class="middle" width="60%">
+	<div class="bar-container">
+		{% set bar = "bar-" +fscore %}
+		{%set rate =facetCounts[fscore]/numFound*100|round(2, method='ceil')|int %}
+		{% set rateStr = rate|int|string %}
+		{% set widthStr = "width:"+rateStr+"%" %}
+		<div class={{bar}} style={{widthStr}}></div>
+	</div>
+	</div>
+	<div class="side right" width="20%">
+	<div align="left">&emsp;{{rateStr + "%"}}</div>
+	</div>
+	{% endfor %}
+</div>
+
+<div class="container-fluid">
+	<div class="row">
+		<div align='left'  width="100%">
+			{% for doc in docs %}
+			<hr>
+			<h4 align='left'><sapn><strong>Score:</strong></sapn>
+				<span >
+						{% set score =doc['overall'] %}
+						{% for i in range(score) %}
+						<span class="fa fa-star checked"></span>
+						{% endfor %}
+						{% for i in range(5-score) %}
+						<span class="fa fa-star-o" style="color:orange"></span>
+						{% endfor %}
+
+				</span>
+			</h4>
+			<h4 align='left'><span ><strong>Summary:</strong></span>
+				<span>{{doc['summary']}}</sapn>
+				</h4>
+			<h4 align='left'><span ><strong>Review Text:</strong></span>
+				<span maxlength = "30">{{doc['reviewText']}}</sapn>
+				</h4>
+
+
+			{% endfor %}
+			</div>
+	</div>
+
+</body>
+{% endblock %}

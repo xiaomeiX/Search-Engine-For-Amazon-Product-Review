@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block title %}Home{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+
+<h1 align = "center" style="color:blue;">Review Search Form</h1>
+
+    <form action="" method="post" >
+		{{ form.csrf_token }}
+        <div align = 'center' placeholder="Search Query">
+            {{ form.query.label }}<br>
+            {{ form.query(size=32) }}
+        </div>
+        <br>
+		<div align = 'center' style="color:blue;">
+			{{ form.submit() }}
+		</div>
+    </form>
+    {% endblock %}

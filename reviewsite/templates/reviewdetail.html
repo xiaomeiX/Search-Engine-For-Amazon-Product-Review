@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block title %}Home{% endblock %}
+{% block head %}
+  {{ super() }}
+
+{% endblock %}
+{% block content %}
+
+
+<script>
+    function goBack() {
+       window.history.back();
+    }
+    </script>
+<body>
+
+<div align="center">
+    <image  class="img-fluid" src="{{url_for('static',filename = 'images/review.jpg')}}" display="inline-block" width ="120" height="100" >
+
+  <span align = "center"> <strong> &emsp;Review Details</strong></span>
+    </div>
+{% if detail==None %}
+<br><br>
+<h3 align = "center">No results for{{id}} </h3>
+{% else %}
+<div></div>
+<div>
+<table border="0.4" cellspacing color = "light blue", style="width: 80%;" align = "center" cellspacing="0">
+    <colgroup>
+        <col span="1" style="background-color: #D6EEEE">
+      </colgroup>
+      <tr><td><strong>ID: </td><td>{{detail['id']}}</td></tr>
+      <tr><td><strong>Product ASIN: </td><td>{{detail['asin']}}</td></tr>
+      <tr><td><strong>Score:</td>
+      <td>
+        {% set score =detail['overall'] %}
+	      {% for i in range(score) %}
+	      <span class="fa fa-star checked"></span>
+	      {% endfor %}
+        {% for i in range(5-score) %}
+				<span class="fa fa-star-o" style="color:orange"></span>
+				{% endfor %}
+      </td></tr>
+    <tr><td><strong>Summary: </td><td>{{detail['summary']}}</td></tr>
+    <tr><td><strong>ReviewText: </td><td>{{detail['reviewText']}}</td></tr>
+</table>
+</div>
+{% endif %}
+<div align = "center">
+    <br>
+<button onclick="goBack()" align = "center" class="btn btn-info">Go Back</button>
+</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block title %}Product Detail{% endblock %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+
+
+  </style>
+{% endblock %}
+{% block content %}
+
+
+<script>
+    function goBack() {
+       window.history.back();
+    }
+</script>
+
+<body>
+  <h2 align = "center"> &emsp;Product Details</h2>
+  <div class = "zoom">
+    <image  class="img-fluid" src="{{url_for('static',filename = 'images/pro.jpg')}}" display="inline-block" width ="200" height="100" >
+  </div>
+
+{% if detail==None %}
+<h3 align = "center">No results for{{id}} </h3>
+{% else %}
+<br>
+<table border="0.4" cellspacing color = "light blue", style="width: 80%;" align = "center" cellspacing="0">
+    <colgroup>
+        <col span="1" style="background-color: #D6EEEE">
+      </colgroup>
+      <tr ><td align="center"><strong>Product ASIN: </td>
+        <td>{{detail['asin']}}
+          <span align = "right">
+            <a style="color: red" href = "{{url_for('productreviews', asin=detail['asin'])}}" title = "Check Product Reviews!">
+
+               <strong> <i class="fa fa-spinner fa-spin fa-3x fa-fw" ></i> Click For Reviews!</strong>
+
+            </a>
+        </span>
+        </td>
+      </tr>
+    <tr ><td align="center"><strong>Product Title: </td><td>{{detail['title']}}</td></tr>
+    <tr ><td align="center"><strong>Description:</td><td>{{detail['description']}}</td></tr>
+    <tr><td  align="center"><strong>Product Price:</td><td><span><strong>&ensp;&#36;</strong></span>{{detail['price']}}</td></tr>
+</table>
+{% endif %}
+<div align = "center">
+    <br>
+<button onclick="goBack()" align = "center" class="btn btn-info">Go Back</button>
+</div>
+{% endblock %}

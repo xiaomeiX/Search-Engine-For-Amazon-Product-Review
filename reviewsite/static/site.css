@@ -1,0 +1,222 @@
+.navbar {
+    background-color: rgb(136, 176, 240);
+    font-size: 1em;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: rgb(30, 29, 32);
+    padding: 8px 5px 8px 5px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.navbar-brand {
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.navbar-item {
+    font-variant: small-caps;
+    margin-left: 30px;
+}
+
+.body-content {
+    padding: 5px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.message {
+    font-weight: 600;
+    color: blue;
+}
+body {
+  padding-top: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.starter-template {
+  padding: 40px 15px;
+}
+h1, h2 {
+  text-align: center;
+}
+#navbar
+{
+
+width:100%;
+height:66px;
+  box-shadow: 0px 1px 10px #5E5E5E;
+  position:fixed;
+  top:0px;
+}
+
+* {
+    box-sizing: border-box;
+  }
+
+    /* Style the header */
+  header {
+    background-color: #666;
+    padding: 30px;
+    text-align: center;
+    font-size: 35px;
+    color: white;
+  }
+  .fa {
+    font-size: 25px;
+  }
+
+  /* Create two columns/boxes that floats next to each other */
+  nav {
+    float: left;
+    width: 30%;
+    height: 300px; /* only for demonstration, should be removed */
+    background: #ccc;
+    padding: 20px;
+  }
+
+  /* Style the list inside the menu */
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  article {
+    float: left;
+    padding: 20px;
+    width: 70%;
+    background-color: #f1f1f1;
+    height: 300px; /* only for demonstration, should be removed */
+  }
+
+  /* Clear floats after the columns */
+  section::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  .important { color: #336699; }
+  .comment.hover {background-color: #D6EEEE;}
+
+	table, th, td {
+        font-family: arial, sans-serif;
+		    border: 0.4px solid black;
+		    border-collapse: collapse;
+
+	  }
+
+		tr:nth-child(even) {
+			background-color: rgba(110, 112, 212, 0.2);
+		  }
+
+		  th {
+			background-color: rgba(050, 212, 112, 0.4);
+		  }
+		  tr:hover {background-color: #D6EEEE;}
+
+            .zoom {
+              padding: 2px;
+              transition: transform .2s; /* Animation */
+              width: 200px;
+              height: 100px;
+              margin: 0 auto;
+            }
+
+            .zoom:hover {
+              transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+            }
+            .flag {
+              transition: transform .2s; /* Animation */
+              margin: 0 auto;
+            }
+            .flag:hover {
+              transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+            }
+            .checked {
+              color: orange;
+            }
+
+/* Three column layout */
+.side {
+  float: left;
+  width: 15%;
+  margin-top: 5px;
+}
+
+.middle {
+  float: left;
+  width: 70%;
+  margin-top: 5px;
+}
+
+/* Place text to the right */
+.right {
+  text-align: right;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* The bar container */
+.bar-container {
+  width: 100%;
+  background-color: #f1f1f1;
+  text-align: center;
+  color: white;
+}
+
+/* Individual bars */
+.bar-5 { height: 12px; background-color: #04AA6D;}
+.bar-4 { height: 12px; background-color: #2196F3;}
+.bar-3 { height: 12px; background-color: #00bcd4;}
+.bar-2 { height: 12px; background-color: #ff9800;}
+.bar-1 { height: 12px; background-color: #f44336;}
+
+p {
+  color: rgb(24, 21, 21);
+  text-indent: 30px;
+  text-transform: uppercase;
+}
+h1 {
+    color: navy;
+    text-indent: 30px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+h3 {
+    color: black;
+    text-indent: 30px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  hr {
+		border: 0;
+		border-bottom: 2px dashed #ddd;
+		background: #999;
+	  }
+
+  /* Style the footer */
+  footer {
+    background-color: #777;
+    padding: 10px;
+    text-align: center;
+    color: white;
+  }
+
+  /* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+  @media (max-width: 500px) {
+    nav, article {
+      width: 100%;
+      height: auto;
+    }
+    .side, .middle {
+      width: 80%;
+    }
+    /* Hide the right column on small screens */
+    .right {
+      display: none;
+    }
+  }

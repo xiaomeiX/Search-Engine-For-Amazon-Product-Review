@@ -1,0 +1,16 @@
+
+{% extends "layout.html" %}
+{% block title %}Home{% endblock %}
+{% block head %}
+  {{ super() }}
+ {% endblock %}
+{% block content %}
+
+  <p><p>
+<h1><br>Welcome to our search app</h1>
+<p align = 'center' style="color: blue"><span>We build a web application that will use SOLR to delieve search results and product and review detail!</span></p>
+<h3>Product collections contain: <span style="color:red"> <strong>{{productCount}}</strong></span> records! <h3>
+<p ></p>
+<h3>Review collections contain:  <span style="color:red"><strong>{{reviewCount}}</strong></span> record!<h3>
+<p ><a href = "{{url_for('searchForm')}}">Review search form </a></p>
+{% endblock %}
